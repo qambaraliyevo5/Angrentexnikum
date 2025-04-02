@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+    <script src="index.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="flex justify-start items-start">
+            <div class="sidebar">
+                <div class="menu">
+                    <p onclick="setTab(1)" class="menu-item active">
+                        <i class="fa-regular fa-images mr-2"></i> Слайдерлар
+                    </p>
+                    <p onclick="setTab(2)" class="menu-item">
+                        <i class="fa-regular fa-newspaper mr-2"></i> Янгиликлар
+                    </p>
+                    <p onclick="setTab(3)" class="menu-item">
+                        <i class="fa-regular fa-address-card mr-2"></i> Биз хакимизда
+                    </p>
+                    <p onclick="setTab(4)" class="menu-item">
+                        <i class="fa-regular fa-flag mr-2"></i> Ракамларда
+                    </p>
+                    <p onclick="setTab(5)" class="menu-item">
+                        <i class="fa-solid fa-taxi mr-2"></i> Хизматлар
+                    </p>
+                </div>
+            </div>
+            <div class="content">
+                <!-- Sliders Tab -->
+                <div id="tab1" class="tab-content">
+                    <div class="tab-header">
+                        <h1><i class="fa-regular fa-images mr-2"></i> Слайдерлар</h1>
+                        <button onclick="document.getElementById('sliderModal').showModal()" class="btn-add">
+                            Слайдер кошиш <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <table class="data-table w-full">
+                        <thead>
+                            <tr>
+                                <th class="w-[65px]">№</th>
+                                <th class="w-4/12">Номи</th>
+                                <th class="w-4/12">Малумоти</th>
+                                <th class="w-3/12">Расми</th>
+                                <th class="w-1/12">Учириш</th>
+                            </tr>
+                        </thead>
+                        <thead  id="slidersTable"></thead>
+                    </table>
+                </div>
+
+                <!-- News Tab (hidden by default) -->
+                <div id="tab2" class="tab-content hidden">
+                    <div class="tab-header">
+                        <h1><i class="fa-regular fa-newspaper mr-2"></i> Янгиликлар</h1>
+                        <button onclick="document.getElementById('newsModal').showModal()" class="btn-add">
+                            Янгилик кошиш <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th class="w-[65px]">№</th>
+                                <th class="w-3/12">Номи</th>
+                                <th class="w-4/12">Киска малумоти</th>
+                                <th class="w-6/12">Толик малумот</th>
+                                <th class="w-4/12">Расми</th>
+                                <th class="w-2/12">Ким ёзгани</th>
+                                <th class="w-2/12">Качон кошилгани</th>
+                                <th class="w-1/12">Учириш</th>
+                            </tr>
+                        </thead>
+                        <tbody id="newsTable"></tbody>
+                    </table>
+                </div>
+
+                <!-- About Tab (hidden by default) -->
+                <div id="tab3" class="tab-content hidden ">
+                    <div class="tab-header">
+                        <h1><i class="fa-regular fa-address-card mr-2"></i> Ходимлар</h1>
+                        <button onclick="document.getElementById('aboutModal').showModal()" class="btn-add">
+                            Ходим кошиш <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th class="w-[65px]">№</th>
+                                <th class="w-4/12">Ф.И.О.</th>
+                                <th class="w-4/12">Ёналишлари</th>
+                                <th class="w-3/12">Расм</th>
+                                <th class="w-1/12">Учириш</th>
+                            </tr>
+                        </thead>
+                        <tbody id="aboutTable"></tbody>
+                    </table>
+                </div>
+
+                <!-- Counts Tab (hidden by default) -->
+                <div id="tab4" class="tab-content hidden">
+                    <div class="tab-header">
+                        <h1><i class="fa-regular fa-flag mr-2"></i> Ракамли малумотлар</h1>
+                        <button onclick="document.getElementById('countsModal').showModal()" class="btn-add">
+                            Ракамли малумот кошиш <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th class="w-[65px]">№</th>
+                                <th class="w-5/12">Ном</th>
+                                <th class="w-5/12">Малумот</th>
+                                <th class="w-1/12">Учириш</th>
+                            </tr>
+                        </thead>
+                        <tbody id="countsTable"></tbody>
+                    </table>
+                </div>
+
+                <!-- Service Tab (hidden by default) -->
+                <div id="tab5" class="tab-content hidden">
+                    <div class="tab-header">
+                        <h1><i class="fa-solid fa-taxi mr-2"></i> Хизматлар</h1>
+                        <button onclick="document.getElementById('serviceModal').showModal()" class="btn-add">
+                            Хизмат кошиш <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th class="w-[65px]">№</th>
+                                <th class="w-5/12">Хизматлар</th>
+                                <th class="w-5/12">Расм</th>
+                                <th class="w-1/12">Учириш</th>
+                            </tr>
+                        </thead>
+                        <tbody id="serviceTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider Modal -->
+        <dialog id="sliderModal" class="modal">
+            <div class="modal-box">
+                <h3 class="modal-title">Слайдер кошиш.</h3>
+                <div class="modal-form">
+                    <input id="sliderTitle" type="text" placeholder="Номи" class="input" />
+                    <input id="sliderDesc" type="text" placeholder="Малумоти" class="input" />
+                    <label class="btn-upload">
+                        Расм юклаш
+                        <input id="sliderImage" type="file" accept="image/*" class="hidden" />
+                    </label>
+                    <p id="sliderImageName">Hech qanday rasm tanlanmagan</p>
+                    <img id="sliderImagePreview" src="" alt="Tanlangan rasm" class="image-preview hidden" />
+                    <button onclick="addSlider()" class="btn-submit">Кошиш</button>
+                </div>
+            </div>
+            <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+            </form>
+        </dialog>
+
+        <!-- News Modal -->
+        <dialog id="newsModal" class="modal">
+            <div class="modal-box">
+                <h3 class="modal-title">Янгилик кошиш.</h3>
+                <div class="modal-form">
+                    <input id="newsTitle" type="text" placeholder="Номи" class="input" />
+                    <input id="newsDesc" type="text" placeholder="Киска малумоти" class="input" />
+                    <textarea id="newsFullDesc" placeholder="Толик малумоти" class="input"></textarea>
+                    <label class="btn-upload">
+                        Расм юклаш
+                        <input id="newsImage" type="file" accept="image/*" class="hidden" />
+                    </label>
+                    <p id="newsImageName">Hech qanday rasm tanlanmagan</p>
+                    <img id="newsImagePreview" src="" alt="Tanlangan rasm" class="image-preview hidden" />
+                    <input id="newsBy" type="text" placeholder="Ким томонидан ёзилгани" class="input" />
+                    <button onclick="addNews()" class="btn-submit">Кошиш</button>
+                </div>
+            </div>
+            <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+            </form>
+        </dialog>
+
+        <!-- About Modal -->
+        <dialog id="aboutModal" class="modal">
+            <div class="modal-box">
+                <h3 class="modal-title">Ходим кошиш.</h3>
+                <div class="modal-form">
+                    <input id="aboutName" type="text" placeholder="Исми" class="input" />
+                    <input id="aboutRoles" type="text" placeholder="Мутахассислиги" class="input" />
+                    <label class="btn-upload">
+                        Расм юклаш
+                        <input id="aboutImage" type="file" accept="image/*" class="hidden" />
+                    </label>
+                    <p id="aboutImageName">Hech qanday rasm tanlanmagan</p>
+                    <img id="aboutImagePreview" src="" alt="Tanlangan rasm" class="image-preview hidden" />
+                    <button onclick="addAbout()" class="btn-submit">Кошиш</button>
+                </div>
+            </div>
+            <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+            </form>
+        </dialog>
+
+        <!-- Counts Modal -->
+        <dialog id="countsModal" class="modal">
+            <div class="modal-box">
+                <h3 class="modal-title">Ракамли малумот кошиш.</h3>
+                <div class="modal-form">
+                    <input id="countsTitle" type="text" placeholder="Ном" class="input" />
+                    <input id="countsDesc" type="text" placeholder="Малумот" class="input" />
+                    <button onclick="addCounts()" class="btn-submit">Кошиш</button>
+                </div>
+            </div>
+            <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+            </form>
+        </dialog>
+
+        <!-- Service Modal -->
+        <dialog id="serviceModal" class="modal">
+            <div class="modal-box">
+                <h3 class="modal-title">Хизмат кошиш.</h3>
+                <div class="modal-form">
+                    <input id="serviceItems" type="text" placeholder="Хизматлар" class="input" />
+                    <label class="btn-upload">
+                        Расм юклаш
+                        <input id="serviceImage" type="file" accept="image/*" class="hidden" />
+                    </label>
+                    <p id="serviceImageName">Hech qanday rasm tanlanmagan</p>
+                    <img id="serviceImagePreview" src="" alt="Tanlangan rasm" class="image-preview hidden" />
+                    <button onclick="addService()" class="btn-submit">Кошиш</button>
+                </div>
+            </div>
+            <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+            </form>
+        </dialog>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
